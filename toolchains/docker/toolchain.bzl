@@ -45,7 +45,10 @@ def _docker_toolchain_impl(ctx):
             xz_path = ctx.attr.xz_path,
         ),
     )
-    return [toolchain_info]
+    template_info = platform_common.TemplateVariableInfo({
+        "DOCKER": ctx.attr.tool_path,
+    })
+    return [toolchain_info, template_info]
 
 # Rule used by the docker toolchain rule to specify a path to the docker
 # binary
